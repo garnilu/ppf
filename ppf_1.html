@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<body>
+
+<h1>Home Page</h1>
+
+<form action="/action_page.php" method="post" name = "ppf_form" onsubmit="return contributionPeriod()">
+  
+  First name:<br>
+  <input type="text" name="firstname" required><br><br>
+  Last name:<br>
+  <input type="text" name="lastname" required><br>
+   <br>
+
+  Gender:<br>
+  <input type="radio" name="gender" value="male" checked> Male
+  <input type="radio" name="gender" value="female"> Female
+  <input type="radio" name="gender" value="other"> Other<br><br>
+
+   Current Age:<br>
+  <input type="number" name="currentage" required><br><br>
+
+  Pension Age:<br>
+  <input type="number" name="pensionage" required><br><br>
+
+  Expected Age:<br>
+  <input type="number" name="expectedage" required><br><br>
+
+  Yearly Contribution:<br>
+  <input type="number" step="any" name="yearlycontribution" required><br><br>
+
+  PPF Interest:<br>
+  <input type="number" step="any" name="ppfinterest" required><br><br>
+
+ <input type="submit" value="Submit">
+</form>
+
+<p id="demo">
+  The Contribution period is
+</p>
+
+<script>
+function contributionPeriod() {
+    var pensionage = document.forms["ppf_form"]["pensionage"].value;
+    var currentage = document.forms["ppf_form"]["currentage"].value;
+
+    if (pensionage > currentage) {
+        contributionperiod = pensionage - currentage
+    else
+        contributionperiod = 0    
+            }
+}
+document.getElementById("demo").innerHTML = contributionPeriod;
+</script>
+
+</body>
+
+
+</html>
