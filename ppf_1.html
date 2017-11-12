@@ -5,54 +5,39 @@
 
 <h1>Home Page</h1>
 
-<form action="/action_page.php" method="post" name = "ppf_form">
+<form action="/tryout.html" method="get" name = "ppf_form" id = "ppf_form">
   
   First name:<br>
-  <input type="text" name="firstname" required><br><br>
+  <input type="text" name="firstname" required id="firstname"><br><br>
   Last name:<br>
-  <input type="text" name="lastname" required><br>
+  <input type="text" name="lastname" required id="lastname"><br>
    <br>
 
   Gender:<br>
-  <input type="radio" name="gender" value="male" checked> Male
-  <input type="radio" name="gender" value="female"> Female
-  <input type="radio" name="gender" value="other"> Other<br><br>
+  <input type="radio" name="gender" value="male" checked id="gender"> Male
+  <input type="radio" name="gender" value="female" id="gender"> Female
+  <input type="radio" name="gender" value="other" id="gender"> Other<br><br>
 
    Current Age:<br>
-  <input type="number" name="currentage" required><br><br>
+  <input type="number" name="currentage" required id="currentage"><br><br>
 
   Pension Age:<br>
-  <input type="number" name="pensionage" required><br><br>
+  <input type="number" name="pensionage" required id="pensionage"><br><br>
 
   Expected Age:<br>
-  <input type="number" name="expectedage" required><br><br>
+  <input type="number" name="expectedage" required id="expectedage"><br><br>
 
   Yearly Contribution:<br>
-  <input type="number" step="any" name="yearlycontribution" required><br><br>
+  <input type="number" step="any" name="yearlycontribution" required id="yearlycontribution"><br><br>
 
   PPF Interest:<br>
-  <input type="number" step="any" name="ppfinterest" required><br><br>
+  <input type="number" step="any" name="ppfinterest" required id="ppfinterest"><br><br>
 
- <input type="submit" value="Submit">
+ <input type="submit" value="Submit" >
 </form>
 
-<p id="demo">
-  The Contribution period is
-</p>
 
-<script>
-function contributionPeriod() {
-    var pensionage = document.forms["ppf_form"]["pensionage"].value;
-    var currentage = document.forms["ppf_form"]["currentage"].value;
 
-    if (pensionage > currentage) {
-        contributionperiod = pensionage - currentage
-    else
-        contributionperiod = 0    
-            }
-}
-document.getElementById("demo").innerHTML = contributionPeriod;
-</script>
 
 </body>
 

@@ -1,0 +1,117 @@
+<html>
+ <body>
+
+ 	<form action = "/javafunctions.html" method="get" name = "ppf_form" id = "ppf_form">
+ 		First name:<br>
+		  	<input type="text" name="firstname" required id="firstname"><br><br>
+  		
+  		Last name:<br>
+  			<input type="text" name="lastname" required id="lastname"><br><br>
+
+  		Gender:<br>
+  			<input type="radio" name="gender" value="male" checked id="gender"> Male
+  			<input type="radio" name="gender" value="female" id="gender"> Female
+  			<input type="radio" name="gender" value="other" id="gender"> Other<br><br>
+    	
+    	Current Age:<br>
+  			<input type="number" name="currentage" required id="currentage"><br><br>
+
+ 		Pension Age:<br>
+  			<input type="number" name="pensionage" required id="pensionage"><br><br>
+
+		Expected Age:<br>
+  			<input type="number" name="expectedage" required id="expectedage"><br><br>
+
+  		Yearly Contribution:<br>
+  			<input type="number" step="any" name="yearlycontribution" required id="yearlycontribution"><br><br>
+
+  		PPF Interest:<br>
+  			<input type="number" step="any" name="ppfinterest" required id="ppfinterest"><br><br>
+
+	</form>
+
+	<button onclick="pensionCalculation()">Calculate</button><br>
+
+ 	Contribution Period is
+ 	<p id = "demo">  </p>
+
+ 	Pension Period is
+ 	<p id = "demo1">  </p>
+ 
+ 	<script type="text/javascript">
+
+		
+		function pensionCalculation() {
+			var currentage = parseInt(document.getElementById("currentage").value);
+			var pensionage = parseInt(document.getElementById("pensionage").value);
+			var expectedage = parseInt(document.getElementById("expectedage").value);
+			var yearlycontribution = parseInt(document.getElementById("yearlycontribution").value);
+			var ppfinterest = parseInt(document.getElementById("ppfinterest").value);	
+
+		    var contributionperiod = 0;
+    		if (pensionage > currentage) {
+        		contributionperiod = pensionage - currentage;
+           }
+
+            var pensionperiod = 0;
+            if (expectedage > pensionage) {
+        		pensionperiod = expectedage - pensionage + 1;
+
+	        } 
+
+	        var age = currentage - 1
+	        var balanceamount = 0
+	        var balanceamountatpensionstart = 0
+	        var yearinterest = 0
+
+	        for (contcyc = 1; contcyc < contributionperiod; contcyc++) {
+ 				
+ 				yearinterest = balanceamount * ppfinterest / 100
+ 				balanceamount = balanceamount + yearinterest + yearlycontribution
+ 				age = age + 1
+
+			}
+
+			balanceamountatpensionstart = balanceamount
+			var pensiontrailamount = 0
+
+			if (pensionperiod > 1) {
+				pensiontrailamount = balanceamount / pensionperiod
+			}
+
+			for (var pensiontrail = 1;pensiontrail <=100;pensiontrail++){
+
+				balanceamount = balanceamountatpensionstart
+				var pensioncyc;
+				for (pensioncyc = 1;pensioncyc <= pensionperiod; pensioncyc++){
+					yearinterest = balanceamount * ppfinterest / 100
+					if (pensioncyc < 10)
+						balanceamount = balanceamount + yearinterest - pensiontrailamount
+					else if (pensioncyc < 20)
+						balanceamount = balanceamount + yearinterest - pensiontrailamount * 1.1
+					else
+						balanceamount = balanceamount + yearinterest - pensiontrailamount * 1.2
+				}
+
+				if balanceamount > pensiontrailamount * 1.1
+					pensiontrailamount = pensiontrailamount * 1.04
+				else
+					pensiontrail = 100
+		
+			} 
+
+			var pensionamount = pensiontrailamount
+			balanceamount = balanceamountatpensionstart
+
+			 For Pension_Cyc = 1 To Pension_Period
+                Age = Age + 1
+                Year_Interest = Balance_Amount * PPF_Interest_Rate / 100
+               
+           document.getElementById("demo").innerHTML = contributionperiod;
+           document.getElementById("demo1").innerHTML = pensionperiod;
+
+        }
+	</script>
+
+ </body>	
+</html>
