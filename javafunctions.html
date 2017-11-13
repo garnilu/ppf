@@ -27,20 +27,16 @@
 
   		PPF Interest:<br>
   			<input type="number" step="any" name="ppfinterest" required id="ppfinterest"><br><br>
-
 	</form>
 
 	<button onclick="pensionCalculation()">Calculate</button><br>
+ 	<p id = "contributionperiod"></p>
+	<p id = "pensionperiod"></p>
+    <p id = "pensionamount"></p>
+	<p id = "balanceamount"></p>  
 
- 	Contribution Period is
- 	<p id = "demo">  </p>
-
- 	Pension Period is
- 	<p id = "demo1">  </p>
- 
  	<script type="text/javascript">
 
-		
 		function pensionCalculation() {
 			var currentage = parseInt(document.getElementById("currentage").value);
 			var pensionage = parseInt(document.getElementById("pensionage").value);
@@ -64,7 +60,7 @@
 	        var balanceamountatpensionstart = 0
 	        var yearinterest = 0
 
-	        for (contcyc = 1; contcyc < contributionperiod; contcyc++) {
+	        for (contcyc = 1; contcyc <= contributionperiod; contcyc++) {
  				
  				yearinterest = balanceamount * ppfinterest / 100
  				balanceamount = balanceamount + yearinterest + yearlycontribution
@@ -73,42 +69,16 @@
 			}
 
 			balanceamountatpensionstart = balanceamount
+
 			var pensiontrailamount = 0
 
 			if (pensionperiod > 1) {
 				pensiontrailamount = balanceamount / pensionperiod
 			}
-
-			for (var pensiontrail = 1;pensiontrail <=100;pensiontrail++){
-
-				balanceamount = balanceamountatpensionstart
-				var pensioncyc;
-				for (pensioncyc = 1;pensioncyc <= pensionperiod; pensioncyc++){
-					yearinterest = balanceamount * ppfinterest / 100
-					if (pensioncyc < 10)
-						balanceamount = balanceamount + yearinterest - pensiontrailamount
-					else if (pensioncyc < 20)
-						balanceamount = balanceamount + yearinterest - pensiontrailamount * 1.1
-					else
-						balanceamount = balanceamount + yearinterest - pensiontrailamount * 1.2
-				}
-
-				if balanceamount > pensiontrailamount * 1.1
-					pensiontrailamount = pensiontrailamount * 1.04
-				else
-					pensiontrail = 100
-		
-			} 
-
-			var pensionamount = pensiontrailamount
-			balanceamount = balanceamountatpensionstart
-
-			 For Pension_Cyc = 1 To Pension_Period
-                Age = Age + 1
-                Year_Interest = Balance_Amount * PPF_Interest_Rate / 100
-               
-           document.getElementById("demo").innerHTML = contributionperiod;
-           document.getElementById("demo1").innerHTML = pensionperiod;
+			
+           document.getElementById("contributionperiod").innerHTML = "Contribution Period is " + contributionperiod;
+           document.getElementById("pensionperiod").innerHTML = "Pension Period is " + pensionperiod;
+           document.getElementById("balanceamount").innerHTML = "Balance Amount at the start of pension is " + balanceamountatpensionstart;
 
         }
 	</script>
