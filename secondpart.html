@@ -1,47 +1,18 @@
 
 
-			for (var pensiontrail = 1;pensiontrail < 100;pensiontrail++){
-
-				balanceamount = balanceamountatpensionstart;
-				var pensioncyc;
-				for (pensioncyc = 1;pensioncyc <= pensionperiod; pensioncyc++){
-					yearinterest = balanceamount * ppfinterest / 100;
-					if (pensioncyc < 10){
-						balanceamount = balanceamount + yearinterest - pensiontrailamount;
-					}
-					else if (pensioncyc < 20){
-						balanceamount = balanceamount + yearinterest - pensiontrailamount * 1.1;
-					}
-					else{
-						balanceamount = balanceamount + yearinterest - pensiontrailamount * 1.2;
-					}
-				}
-
-				if balanceamount > pensiontrailamount * 1.1
-					pensiontrailamount = pensiontrailamount * 1.04
-				else
-					pensiontrail = 100
-		
-			} 
-
-			var pensionamount = pensiontrailamount
-			balanceamount = balanceamountatpensionstart
-			for (pensioncyc = 1;pensioncyc <= pensionperiod; pensioncyc++){
-
-				age = age + 1
-				yearinterest = balanceamount * ppfinterest / 100
-				if pensioncyc < 10 {
+			var pensionamount = pensiontrailamount;
+			balanceamount = balanceamountatpensionstart;
+			for (var pensioncyc = 1; pensioncyc <= pensionperiod; pensioncyc++){
+				yearinterest = balanceamount * ppfinterest / 100;
+				if (pensioncyc < 10) {
 					balanceamount = balanceamount + yearinterest - pensionamount
 					document.getElementById("pensionamount").innerHTML = pensionamount;
 					document.getElementById("balanceamount").innerHTML = balanceamount;
-				}
-				else if pensioncyc < 20 {
+				} else if (pensioncyc < 20) {
 					balanceamount = balanceamount + yearinterest - pensionamount * 1.1
 					document.getElementById("pensionamount").innerHTML = pensionamount * 1.1;
 					document.getElementById("balanceamount").innerHTML = balanceamount;
-				}
-
-				else {
+				} else {
 					balanceamount = balanceamount + yearinterest - pensionamount * 1.2
 					document.getElementById("pensionamount").innerHTML = pensionamount * 1.2;
 					document.getElementById("balanceamount").innerHTML = balanceamount;
