@@ -1,17 +1,20 @@
 
 
-			for (var pensiontrail = 1;pensiontrail <=100;pensiontrail++){
+			for (var pensiontrail = 1;pensiontrail < 100;pensiontrail++){
 
-				balanceamount = balanceamountatpensionstart
+				balanceamount = balanceamountatpensionstart;
 				var pensioncyc;
 				for (pensioncyc = 1;pensioncyc <= pensionperiod; pensioncyc++){
-					yearinterest = balanceamount * ppfinterest / 100
-					if (pensioncyc < 10)
-						balanceamount = balanceamount + yearinterest - pensiontrailamount
-					else if (pensioncyc < 20)
-						balanceamount = balanceamount + yearinterest - pensiontrailamount * 1.1
-					else
-						balanceamount = balanceamount + yearinterest - pensiontrailamount * 1.2
+					yearinterest = balanceamount * ppfinterest / 100;
+					if (pensioncyc < 10){
+						balanceamount = balanceamount + yearinterest - pensiontrailamount;
+					}
+					else if (pensioncyc < 20){
+						balanceamount = balanceamount + yearinterest - pensiontrailamount * 1.1;
+					}
+					else{
+						balanceamount = balanceamount + yearinterest - pensiontrailamount * 1.2;
+					}
 				}
 
 				if balanceamount > pensiontrailamount * 1.1

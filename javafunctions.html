@@ -33,7 +33,11 @@
  	<p id = "contributionperiod"></p>
 	<p id = "pensionperiod"></p>
     <p id = "pensionamount"></p>
-	<p id = "balanceamount"></p>  
+	<p id = "balanceamount"></p>
+	<p id = "pensiontrailamount"></p>
+	<p id = "yearinterest"></p>
+
+
 
  	<script type="text/javascript">
 
@@ -75,10 +79,41 @@
 			if (pensionperiod > 1) {
 				pensiontrailamount = balanceamount / pensionperiod
 			}
+
+			for (var pensiontrail = 1; pensiontrail < 100; pensiontrail++){
+
+				balanceamount = balanceamountatpensionstart;
+				
+				for (var pensioncyc = 1; pensioncyc <= pensionperiod; pensioncyc++){
+					yearinterest = balanceamount * ppfinterest / 100;
+					if (pensioncyc < 10){
+						balanceamount = balanceamount + yearinterest - pensiontrailamount;
+					}
+					else if (pensioncyc < 20){
+						balanceamount = balanceamount + yearinterest - pensiontrailamount * 1.1;
+					}
+					else{
+						balanceamount = balanceamount + yearinterest - pensiontrailamount * 1.2;
+					}
+				}
+
+				if (balanceamount > pensiontrailamount * 1.1){
+					pensiontrailamount = pensiontrailamount * 1.04;
+				}
+				else{
+					pensiontrail = 100;
+				}
+		
+			} 
 			
            document.getElementById("contributionperiod").innerHTML = "Contribution Period is " + contributionperiod;
            document.getElementById("pensionperiod").innerHTML = "Pension Period is " + pensionperiod;
-           document.getElementById("balanceamount").innerHTML = "Balance Amount at the start of pension is " + balanceamountatpensionstart;
+           document.getElementById("balanceamount").innerHTML = "Balance Amount at the start of pension is " + balanceamount;
+           document.getElementById("pensiontrailamount").innerHTML = "Pension Trail Amount " + pensiontrailamount;
+           document.getElementById("yearinterest").innerHTML = "Yearly Interest is " + yearinterest;
+
+
+
 
         }
 	</script>
