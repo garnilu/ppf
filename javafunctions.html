@@ -37,6 +37,9 @@
 	<p id = "pensiontrailamount"></p>
 	<p id = "yearinterest"></p>
 
+	<div id="tablePrint1"> </div>
+	<div id="tablePrint2"> </div>
+
 
 
  	<script type="text/javascript">
@@ -46,9 +49,9 @@
 			var pensionage = parseInt(document.getElementById("pensionage").value);
 			var expectedage = parseInt(document.getElementById("expectedage").value);
 			var yearlycontribution = parseInt(document.getElementById("yearlycontribution").value);
-			var ppfinterest = parseInt(document.getElementById("ppfinterest").value);	
+			var ppfinterest = parseInt(document.getElementById("ppfinterest").value);
 
-		    var contributionperiod = 0;
+			var contributionperiod = 0;
     		if (pensionage > currentage) {
         		contributionperiod = pensionage - currentage;
            }
@@ -62,15 +65,35 @@
 	        var age = currentage - 1
 	        var balanceamount = 0
 	        var balanceamountatpensionstart = 0
-	        var yearinterest = 0
+	        var yearinterest = 0	
+
+			var myTable= "<table><tr><td style='width: 100px; color: red;text-align: right;'>Age</td>";
+    		myTable+= "<td style='width: 100px; color: red; text-align: right;'>Deposit Cycle</td>";
+    		myTable+="<td style='width: 200px; color: red; text-align: right;'>Deposit Amount</td>";
+    		myTable+= "<td style='width: 200px; color: red; text-align: right;'>Interest</td>";
+    		myTable+= "<td style='width: 200px; color: red; text-align: right;'>Balance Amount</td></tr>";
+
+    		myTable+="<tr><td style='width: 100px; text-align: right;'>---------------</td>";
+    		myTable+="<td     style='width: 100px; text-align: right;'>---------------</td>";
+    		myTable+="<td     style='width: 200px; text-align: right;'>---------------</td>";
+    		myTable+="<td     style='width: 200px; text-align: right;'>---------------</td>";
+    		myTable+="<td     style='width: 200px; text-align: right;'>---------------</td></tr>";
+
 
 	        for (contcyc = 1; contcyc <= contributionperiod; contcyc++) {
  				
  				yearinterest = balanceamount * ppfinterest / 100
  				balanceamount = balanceamount + yearinterest + yearlycontribution
  				age = age + 1
+ 				myTable+="<tr><td style='width: 100px;text-align: right;'> " + age + " </td>";
+    			myTable+="<td style='width: 100px; text-align: right;'>" + contcyc + "</td>";
+    			myTable+="<td style='width: 200px; text-align: right;'>" + yearlycontribution + "</td>"
+    			myTable+="<td style='width: 200px; text-align: right;'>" + yearinterest.toFixed(2) + "</td>"
+    			myTable+="<td style='width: 200px; text-align: right;'>" + balanceamount.toFixed(2) + "</td></tr>";
+
 
 			}
+			myTable+="</table>";
 
 			balanceamountatpensionstart = balanceamount
 
@@ -105,12 +128,53 @@
 				}
 		
 			} 
+
+			var pensionamount = pensiontrailamount;
+			balanceamount = balanceamountatpensionstart;
+
+			var myTable1= "<table><tr><td style='width: 100px; color: red;text-align: right;'>Age</td>";
+    		myTable1+= "<td style='width: 100px; color: red; text-align: right;'>Pension Cylce</td>";
+    		myTable1+="<td style='width: 200px; color: red; text-align: right;'>Pension Amount</td>";
+    		myTable1+= "<td style='width: 200px; color: red; text-align: right;'>Interest</td>";
+    		myTable1+= "<td style='width: 200px; color: red; text-align: right;'>Balance Amount</td></tr>";
+
+    		myTable1+="<tr><td style='width: 100px; text-align: right;'>---------------</td>";
+    		myTable1+="<td     style='width: 100px; text-align: right;'>---------------</td>";
+    		myTable1+="<td     style='width: 200px; text-align: right;'>---------------</td>";
+    		myTable1+="<td     style='width: 200px; text-align: right;'>---------------</td>";
+    		myTable1+="<td     style='width: 200px; text-align: right;'>---------------</td></tr>";
+
+			
+
+			for (var pensioncyc = 1; pensioncyc <= pensionperiod; pensioncyc++){
+				
+				yearinterest = balanceamount * ppfinterest / 100;
+				age = age + 1;
+				
+				if (pensioncyc < 10) {
+					balanceamount = balanceamount + yearinterest - pensionamount;	
+				} else if (pensioncyc < 20) {
+					balanceamount = balanceamount + yearinterest - pensionamount * 1.1;
+				} else {
+					balanceamount = balanceamount + yearinterest - pensionamount * 1.2;
+				}
+				
+ 				myTable1+="<tr><td style='width: 100px;text-align: right;'> " + age + " </td>";
+    			myTable1+="<td style='width: 100px; text-align: right;'>" + pensioncyc + "</td>";
+    			myTable1+="<td style='width: 200px; text-align: right;'>" + pensionamount.toFixed(2) + "</td>";
+    			myTable1+="<td style='width: 200px; text-align: right;'>" + yearinterest.toFixed(2) + "</td>";
+    			myTable1+="<td style='width: 200px; text-align: right;'>" + balanceamount.toFixed(2) + "</td></tr>";
+
+			}
+			myTable1+="</table>";
+
+			
 			
            document.getElementById("contributionperiod").innerHTML = "Contribution Period is " + contributionperiod;
            document.getElementById("pensionperiod").innerHTML = "Pension Period is " + pensionperiod;
-           document.getElementById("balanceamount").innerHTML = "Balance Amount at the start of pension is " + balanceamount;
-           document.getElementById("pensiontrailamount").innerHTML = "Pension Trail Amount " + pensiontrailamount;
-           document.getElementById("yearinterest").innerHTML = "Yearly Interest is " + yearinterest;
+           document.getElementById("balanceamount").innerHTML = "Balance Amount at the end is " + balanceamount;
+           document.getElementById('tablePrint1').innerHTML = myTable;
+           document.getElementById('tablePrint2').innerHTML = myTable1;
 
 
 
