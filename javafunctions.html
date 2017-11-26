@@ -1,35 +1,42 @@
 <html>
+<head>
+	<link rel="stylesheet" href="style.css">
+	</head>
+ 
+
  <body>
 
+ 	<h1>Financial Calculator</h1>
+
  	<form action = "/javafunctions.html" method="get" name = "ppf_form" id = "ppf_form">
- 		First name:<br>
-		  	<input type="text" name="firstname" required id="firstname"><br><br>
+ 		
+		  	<input type="text" name="firstname" required id="firstname" placeholder="First Name"><br><br>
   		
-  		Last name:<br>
-  			<input type="text" name="lastname" required id="lastname"><br><br>
+  		
+  			<input type="text" name="lastname" required id="lastname" placeholder="Last Name"><br><br>
 
   		Gender:<br>
   			<input type="radio" name="gender" value="male" checked id="gender"> Male
   			<input type="radio" name="gender" value="female" id="gender"> Female
   			<input type="radio" name="gender" value="other" id="gender"> Other<br><br>
     	
-    	Current Age:<br>
-  			<input type="number" name="currentage" required id="currentage"><br><br>
+    	
+  			<input type="number" name="currentage" required id="currentage" placeholder="Current Age"><br><br>
 
- 		Pension Age:<br>
-  			<input type="number" name="pensionage" required id="pensionage"><br><br>
+ 		
+  			<input type="number" name="pensionage" required id="pensionage" placeholder="Pension Age"><br><br>
 
-		Expected Age:<br>
-  			<input type="number" name="expectedage" required id="expectedage"><br><br>
+		
+  			<input type="number" name="expectedage" required id="expectedage" placeholder="Expected Age"><br><br>
 
-  		Yearly Contribution:<br>
-  			<input type="number" step="any" name="yearlycontribution" required id="yearlycontribution"><br><br>
+  		
+  			<input type="number" step="any" name="yearlycontribution" required id="yearlycontribution" placeholder="Yearly Contribution"><br><br>
 
-  		PPF Interest:<br>
-  			<input type="number" step="any" name="ppfinterest" required id="ppfinterest"><br><br>
+  		
+  			<input type="number" step="any" name="ppfinterest" required id="ppfinterest" placeholder="PPF Interest"><br><br>
 	</form>
 
-	<button onclick="pensionCalculation()">Calculate</button><br>
+	<button onclick="pensionCalculation()" id="input-submit">Calculate</button><br>
  	<p id = "contributionperiod"></p>
 	<p id = "pensionperiod"></p>
     <p id = "pensionamount"></p>
